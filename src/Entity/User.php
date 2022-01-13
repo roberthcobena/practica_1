@@ -16,6 +16,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\ManyToOne(targetEntity:"App\Entity\TipoUsuario", inversedBy:"id")]        
+    private $tipo_usuario;
+
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
@@ -25,10 +28,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $estado;
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function geTipoUsuario() 
+    {
+		return $this->tipo_usuario;
+	}
+	public function setTipoUsuario($tipo_usuario):void
+    {
+		$this->tipo_usuario = $tipo_usuario;
+	}
 
     public function getEmail(): ?string
     {
@@ -82,6 +97,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

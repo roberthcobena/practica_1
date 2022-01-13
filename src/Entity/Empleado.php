@@ -13,6 +13,9 @@ class Empleado
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\ManyToOne(targetEntity:"App\Entity\User", inversedBy:"id")]        
+    private $usuario;
+
     #[ORM\Column(type: 'string', length: 255)]
     private $nombres;
 
@@ -23,6 +26,15 @@ class Empleado
     {
         return $this->id;
     }
+
+    public function getUsuario() 
+    {
+		return $this->usuario;
+	}
+	public function setUsuario($usuario):void
+    {
+		$this->usuario = $usuario;
+	}
 
     public function getNombres(): ?string
     {

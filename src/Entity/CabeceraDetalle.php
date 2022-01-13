@@ -6,6 +6,10 @@ use App\Repository\CabeceraDetalleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CabeceraDetalleRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ */
+
 class CabeceraDetalle
 {
     #[ORM\Id]
@@ -14,12 +18,16 @@ class CabeceraDetalle
     private $id;
 
     #[ORM\Column(type: 'datetime')]
-    private $fecha_generado;
+    private $fechaGenerado;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Empleado", mappedBy="cabeceradetalle")
-     */    
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Empleado", inversedBy:"id")]        
     private $empleado;
+
+    #[ORM\ManyToOne(targetEntity:"App\Entity\User", inversedBy:"id")]        
+    private $usuario;
+
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Sueldo", inversedBy:"id")]        
+    private $sueldo;
 
     public function getId(): ?int
     {
@@ -28,12 +36,12 @@ class CabeceraDetalle
 
     public function getFechaGenerado(): ?\DateTimeInterface
     {
-        return $this->fecha_generado;
+        return $this->fechaGenerado;
     }
 
-    public function setFechaGenerado(\DateTimeInterface $fecha_generado): self
+    public function setFechaGenerado(\DateTimeInterface $fechaGenerado): self
     {
-        $this->fecha_generado = $fecha_generado;
+        $this->fechaGenerado = $fechaGenerado;
 
         return $this;
     }
@@ -45,5 +53,23 @@ class CabeceraDetalle
 	public function setEmpleado($empleado):void
     {
 		$this->empleado = $empleado;
+	}
+
+    public function getUsuario() 
+    {
+		return $this->usuario;
+	}
+	public function setUsuario($usuario):void
+    {
+		$this->usuario = $usuario;
+	}
+
+    public function getSueldo() 
+    {
+		return $this->sueldo;
+	}
+	public function setSueldo($sueldo):void
+    {
+		$this->sueldo = $sueldo;
 	}
 }

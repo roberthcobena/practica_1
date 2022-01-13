@@ -13,6 +13,9 @@ class Horas
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Empleado", inversedBy:"id")]        
+    private $empleado;
+
     #[ORM\Column(type: 'datetime')]
     private $marcado;
 
@@ -23,6 +26,15 @@ class Horas
     {
         return $this->id;
     }
+
+    public function getEmpleado() 
+    {
+		return $this->empleado;
+	}
+	public function setEmpleado($empleado):void
+    {
+		$this->empleado = $empleado;
+	}
 
     public function getMarcado(): ?\DateTimeInterface
     {

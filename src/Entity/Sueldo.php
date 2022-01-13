@@ -13,23 +13,46 @@ class Sueldo
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Empleado", inversedBy:"id")]        
+    private $empleado;
+
     #[ORM\Column(type: 'float')]
+
     private $valor;
 
+    #[ORM\Column(type: 'datetime')]
+
+    private $FechaRegistro;
     
     #[ORM\Column(type: 'datetime')]
-    private $fecha_registro;
+
+    private $UltimaModificacion;
     
-    #[ORM\Column(type: 'datetime')]
-    private $ultima_modificacion;
-    
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'integer')]
     private $estado;
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function getEmpleado() 
+    {
+		return $this->empleado;
+	}
+	public function setEmpleado($empleado):void
+    {
+		$this->empleado = $empleado;
+	}
+
+    public function getSueldo() 
+    {
+		return $this->sueldo;
+	}
+	public function setSueldo($sueldo):void
+    {
+		$this->sueldo = $sueldo;
+	}
 
     public function getValor(): ?float
     {
@@ -46,24 +69,24 @@ class Sueldo
     
     public function getFechaRegistro(): ?\DateTimeInterface
     {
-        return $this->fecha_registro;
+        return $this->FechaRegistro;
     }
     
-    public function setFechaRegistro(\DateTimeInterface $fecha_registro): self
+    public function setFechaRegistro(\DateTimeInterface $FechaRegistro): self
     {
-        $this->fecha_registro = $fecha_registro;
+        $this->FechaRegistro = $FechaRegistro;
         
         return $this;
     }
     
     public function getUltimaModificacion(): ?\DateTimeInterface
     {
-        return $this->ultima_modificacion;
+        return $this->UltimaModificacion;
     }
     
-    public function setUltimaModificacion(\DateTimeInterface $ultima_modificacion): self
+    public function setUltimaModificacion(\DateTimeInterface $UltimaModificacion): self
     {
-        $this->ultima_modificacion = $ultima_modificacion;
+        $this->UltimaModificacion = $UltimaModificacion;
         
         return $this;
     }

@@ -17,7 +17,7 @@ class Jornada
     private $detalle;
 
     #[ORM\Column(type: 'integer')]
-    private $horas_dia;
+    private $horasDia;
 
     public function getId(): ?int
     {
@@ -38,12 +38,12 @@ class Jornada
 
     public function getHorasDia(): ?int
     {
-        return $this->horas_dia;
+        return $this->horasDia;
     }
 
-    public function setHorasDia(int $horas_dia): self
+    public function setHorasDia(int $horasDia): self
     {
-        $this->horas_dia = $horas_dia;
+        $this->horasDia = $horasDia;
 
         return $this;
     }
